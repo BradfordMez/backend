@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const User = require("./users-model");
-const tokenBuilder = require("../tokenBuilder/token-builder");
+const {tokenBuilder} = require("../tokenBuilder/token-builder");
 const { restricted } = require('../middleware/user-middleware')
 const mid = require("../middleware/user-middleware");
 
@@ -21,23 +21,12 @@ router.post("/register",
 );
 
 router.post("/login", mid.usernameExists, mid.validateUser, (req, res, next) => {
-  // if (bcrypt.compareSync(req.body.password, req.user.password)) {
-  //   const token = tokenBuilder(req.user);
-  //   res.json({ message: `welcome, ${req.user.username}`, token });
-  // } else {
-  //   next({ status: 401, message: "invalid credentials" });
-  // }
-  let { password } = req.body;
-
-  User.findBy(req.body.username)
-    .then(([user])=>{
-      if (user && bcrypt.compareSync(password, user.password)){
-        const token = tokenBuilder(user)
-        res.status(200).json({message: `${user.username} is back!`, token})
-      }else{
-        next({status:401, message: 'Invalid Credentials'})
-      }
-    })
+  if (bcrypt.compareSync(req.body.password, req.user.password)) {
+    const token = tokenBuilder(req.user);
+    res.json({ message: `welcome, ${req.user.username}`, token });
+  } else {
+    next({ status: 401, message: "invalid credentials" });
+  }
 });
 
 router.get('/', (req, res, next)=>{
