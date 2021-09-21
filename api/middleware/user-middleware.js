@@ -66,9 +66,25 @@ const validateUser = (req, res, next)=>{
     }
 }
 
+const validateUserId = async (req, res, next,)=>{
+  try {
+    const user = await Users.findById(req.params.user_id)
+    if(!user){
+      res.status(404).json({message: 'user not found'})
+    }else{
+      req.user = user;
+      next()
+    }
+  }catch(err){
+    next({status: 500, message: 'Problem finding user'})
+  }
+
+}
+
 module.exports = {
   restricted,
   checkUsernameFree,
   usernameExists,
-  validateUser
+  validateUser,
+  validateUserId
 };

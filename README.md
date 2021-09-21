@@ -1,7 +1,7 @@
 # BackEndAfrMark
 
 Endpoints :
-
+```
 [POST] /api/users/register
 [POST] /api/users/login
 
@@ -11,10 +11,11 @@ Endpoints :
 [GET] /api/markets/
 [GET] /api/markets/:market_id
 [POST] /api/markets/
-
+```
 ------------------------------------------------------------------------------------
 
 Register User 
+```
 [POST] (/api/users/register) :
 // body
 {
@@ -29,8 +30,9 @@ Register User
     "name": "foo Name",
     "password": "$2a$08$3/0/kbDWm/DoBKswjESwUeRjjrsmfSWSRdLbvIBoVC9Y8npsgTZE."
 }
-
+```
 Login 
+```
 [POST] (/api/users/login) :
 // body
 {
@@ -42,9 +44,10 @@ Login
     "message": "welcome, foo",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo2LCJ1c2VybmFtZSI6ImZvbyIsImlhdCI6MTYzMjE4MDc3NCwiZXhwIjoxNjMyMjY3MTc0fQ.jegFvlL8fE_VsLIVOvVo8B4Pf9DKJxkH6ByS7XyV0wA" 
 }
-
+```
 
 Get Items 
+```
 [GET] (/api/items/) :
 // response
 {
@@ -54,8 +57,9 @@ Get Items
         "item_name": "Granny Smith",
         "item_price": 1.2
 }
-
+```
 Add Items (must be logged in)
+```
 [POST] (/api/items/) :
 // body
 {
@@ -72,9 +76,10 @@ Add Items (must be logged in)
     "item_price": 1.2,
     "market_id": 1
 }
-
+```
 
 Get Markets
+```
 [GET] (/api/markets) :
 // response
 [
@@ -94,8 +99,9 @@ Get Markets
         "user_id": 3
     }
 ]
-
+```
 Get Markets by ID
+```
 [GET] (/api/markets/:market_id) / (/api/markets/3)
 // response
 {
@@ -124,8 +130,9 @@ Get Markets by ID
         }
     ]
 }
-
+```
 Create a Market (Must be logged in)
+```
 [POST] (/api/markets/)
 // body
 {
@@ -138,3 +145,4 @@ Create a Market (Must be logged in)
     "market_name": "FooSnackShack",
     "user_id": 4
 }
+```
